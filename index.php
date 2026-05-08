@@ -1,176 +1,686 @@
 <?php
-$greeting = "Hello, World!";
-$subtitle = "Welcome to my PHP page";
+// RHCE Master Hub - Single File PHP Version
+// Author: Achyut Hadavani
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hello World</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Advanced RHCSA study website with searchable chapters, progress tracking, and hands-on Linux command references." />
+  <title>RHCE Master Hub</title>
 
-    :root {
-      --bg:       #0b0c10;
-      --surface:  #13141a;
-      --accent:   #e8c46a;
-      --glow:     rgba(232, 196, 106, 0.18);
-      --text:     #f0ece0;
-      --muted:    #6b6860;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'DM Mono', monospace;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    /* Noise overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Radial glow */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .card {
-      position: relative;
-      z-index: 1;
-      background: var(--surface);
-      border: 1px solid rgba(232, 196, 106, 0.15);
-      border-radius: 4px;
-      padding: 60px 72px;
-      text-align: center;
-      max-width: 580px;
-      width: 90%;
-      box-shadow: 0 0 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
-      animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(32px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0)   scale(1);    }
-    }
-
-    .tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 28px;
-      display: block;
-      animation: fade 1s 0.3s ease both;
-    }
-
-    .heading {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 6vw, 4rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      animation: fade 1s 0.5s ease both;
-    }
-
-    .heading span {
-      color: var(--accent);
-      position: relative;
-      display: inline-block;
-    }
-
-    /* Underline accent */
-    .heading span::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -4px;
-      width: 100%; height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      animation: line 0.6s 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes line {
-      to { transform: scaleX(1); }
-    }
-
-    .divider {
-      margin: 28px auto;
-      width: 48px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.35;
-      animation: fade 1s 0.65s ease both;
-    }
-
-    .subtitle {
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      animation: fade 1s 0.75s ease both;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 36px;
-      padding: 6px 16px;
-      border: 1px solid rgba(232, 196, 106, 0.3);
-      border-radius: 2px;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      color: var(--accent);
-      text-transform: uppercase;
-      animation: fade 1s 0.9s ease both;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <header class="site-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="btn-icon" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo">
+        <span class="logo-icon"><i class="fa-brands fa-linux"></i></span>
+        <span>RHCE <span class="logo-accent">Master Hub</span></span>
+      </div>
+    </div>
 
-  <div class="card">
-    <span class="tag">PHP &bull; <?php echo date('Y'); ?></span>
-    <h1 class="heading">
-      <?php
-        // Split "Hello, World!" into two parts for styling
-        $parts = explode(',', $greeting, 2);
-        echo htmlspecialchars($parts[0]) . ', <span>' . ltrim(htmlspecialchars($parts[1])) . '</span>';
-      ?>
-    </h1>
-    <div class="divider"></div>
-    <p class="subtitle"><?php echo htmlspecialchars($subtitle); ?></p>
-    <div class="badge">GT WON 2026 IPL TROPHY  🏆🏆🏆🏆🏆🏆 </div>
+    <div class="header-center">
+      <div class="search-wrap" id="searchWrap">
+        <i class="fas fa-search search-icon-i"></i>
+        <input id="searchInput" class="search-input" type="text" placeholder="Search commands, topics, and sections..." />
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="focusModeBtn" class="btn-icon" aria-label="Focus mode" title="Pomodoro Focus Mode">
+        <i class="fas fa-brain"></i>
+      </button>
+      <span id="focusIndicator" class="focus-indicator"><i class="fas fa-circle"></i> <span id="focusTimerDisplay">25:00</span></span>
+      <button id="shortcutsBtn" class="btn-icon" aria-label="Keyboard shortcuts">
+        <i class="fas fa-keyboard"></i>
+      </button>
+      <button id="themeToggle" class="btn-icon" aria-label="Toggle theme"></button>
+    </div>
+  </header>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-section-label">Study Progress</div>
+    <div class="overall-progress-wrap">
+      <div class="progress-label">
+        <span id="progressText">0 / 17 complete</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div id="overallProgress" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="streak-wrap">
+      <div class="streak-badge" id="streakBadge">
+        <span class="streak-fire">🔥</span>
+        <span id="streakCount">0 day streak</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">Navigation</div>
+    <nav class="sidebar-nav" aria-label="Chapter navigation">
+      <a href="#home" class="nav-item active" data-section="home">
+        <i class="fas fa-house"></i><span>Dashboard</span><span class="chapter-done-dot"></span>
+      </a>
+      <a href="#profile" class="nav-item" data-section="profile">
+        <i class="fas fa-id-badge"></i><span>Profile</span><span class="chapter-done-dot"></span>
+      </a>
+      <a href="#ch1" class="nav-item" data-section="ch1">
+        <i class="fas fa-user-shield"></i><span>CH1 Users & Auth</span><span class="chapter-done-dot" data-chap="ch1"></span>
+      </a>
+      <a href="#ch2" class="nav-item" data-section="ch2">
+        <i class="fas fa-file-lines"></i><span>CH2 Files & Text</span><span class="chapter-done-dot" data-chap="ch2"></span>
+      </a>
+      <a href="#ch3" class="nav-item" data-section="ch3">
+        <i class="fas fa-lock"></i><span>CH3 Permissions</span><span class="chapter-done-dot" data-chap="ch3"></span>
+      </a>
+      <a href="#ch4" class="nav-item" data-section="ch4">
+        <i class="fas fa-box-open"></i><span>CH4 Software</span><span class="chapter-done-dot" data-chap="ch4"></span>
+      </a>
+      <a href="#ch6" class="nav-item" data-section="ch6">
+        <i class="fas fa-gears"></i><span>CH6 Process Control</span><span class="chapter-done-dot" data-chap="ch6"></span>
+      </a>
+      <a href="#ch7" class="nav-item" data-section="ch7">
+        <i class="fas fa-hard-drive"></i><span>CH7 Storage Basics</span><span class="chapter-done-dot" data-chap="ch7"></span>
+      </a>
+      <a href="#ch8" class="nav-item" data-section="ch8">
+        <i class="fas fa-layer-group"></i><span>CH8 LVM & Swap</span><span class="chapter-done-dot" data-chap="ch8"></span>
+      </a>
+      <a href="#ch9" class="nav-item" data-section="ch9">
+        <i class="fas fa-plug-circle-check"></i><span>CH9 Mounting</span><span class="chapter-done-dot" data-chap="ch9"></span>
+      </a>
+      <a href="#ch10" class="nav-item" data-section="ch10">
+        <i class="fas fa-terminal"></i><span>CH10 Shell Scripting</span><span class="chapter-done-dot" data-chap="ch10"></span>
+      </a>
+      <a href="#ch11" class="nav-item" data-section="ch11">
+        <i class="fas fa-clock-rotate-left"></i><span>CH11 Scheduling</span><span class="chapter-done-dot" data-chap="ch11"></span>
+      </a>
+      <a href="#ch11b" class="nav-item" data-section="ch11b">
+        <i class="fas fa-book"></i><span>CH11b Logging</span><span class="chapter-done-dot" data-chap="ch11b"></span>
+      </a>
+      <a href="#ch12" class="nav-item" data-section="ch12">
+        <i class="fas fa-wifi"></i><span>CH12 Networking</span><span class="chapter-done-dot" data-chap="ch12"></span>
+      </a>
+      <a href="#ch15" class="nav-item" data-section="ch15">
+        <i class="fas fa-shield-virus"></i><span>CH15 SELinux</span><span class="chapter-done-dot" data-chap="ch15"></span>
+      </a>
+      <a href="#networking" class="nav-item" data-section="networking">
+        <i class="fas fa-network-wired"></i><span>Networking Lab</span><span class="chapter-done-dot" data-chap="networking"></span>
+      </a>
+      <a href="#nfs" class="nav-item" data-section="nfs">
+        <i class="fas fa-folder-tree"></i><span>NFS Setup</span><span class="chapter-done-dot" data-chap="nfs"></span>
+      </a>
+      <a href="#podman" class="nav-item" data-section="podman">
+        <i class="fas fa-cubes"></i><span>Podman Basics</span><span class="chapter-done-dot" data-chap="podman"></span>
+      </a>
+      <a href="#simulator" class="nav-item" data-section="simulator">
+        <i class="fas fa-stopwatch"></i><span>Exam Simulator</span><span class="chapter-done-dot" data-chap="simulator"></span>
+      </a>
+      <a href="#tools" class="nav-item" data-section="tools">
+        <i class="fas fa-screwdriver-wrench"></i><span>Exam Tools</span><span class="chapter-done-dot" data-chap="tools"></span>
+      </a>
+      <a href="#handbook" class="nav-item" data-section="handbook">
+        <i class="fas fa-book-open"></i><span>Full Handbook</span><span class="chapter-done-dot"></span>
+      </a>
+    </nav>
+  </aside>
+
+  <main id="mainContent" class="main-content">
+    <section id="home" class="hero">
+      <div class="hero-pattern" aria-hidden="true"></div>
+      <div class="hero-particles" aria-hidden="true">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      </div>
+      <div class="hero-badge"><i class="fas fa-bolt"></i> Advanced Training Portal</div>
+      <h1 class="hero-title">RHCSA From Practice To Precision</h1>
+      <p class="hero-subtitle">
+        A complete interactive website for command mastery, exam workflows, and repeatable Linux labs. Track progress,
+        jump by topic, and practice with real command blocks.
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num" data-count="17">0</div><div class="stat-lbl">Sections</div></div>
+        <div class="stat"><div class="stat-num" data-count="130">0</div><div class="stat-lbl">Commands</div></div>
+        <div class="stat"><div class="stat-num" data-count="20">0</div><div class="stat-lbl">Lab Workflows</div></div>
+      </div>
+    </section>
+
+    <section id="profile" class="content-section sc-tools">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-id-badge"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Candidate Profile</div>
+          <h2>Achyut Hadavani</h2>
+          <p>RHCE score: <strong>300/300</strong>. Linux system administrator profile focused on automation, reliability, and production-grade operational discipline.</p>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-star"></i>Professional Overview</div>
+        <div class="cb-body">
+          <div class="two-col">
+            <div class="compare-card green">
+              <div class="compare-title">Certification Performance</div>
+              <p><strong>Name:</strong> Achyut Hadavani</p>
+              <p><strong>Exam:</strong> RHCSA</p>
+              <p><strong>Score:</strong> 300/300</p>
+              <p><strong>Level:</strong> Expert execution under exam conditions</p>
+            </div>
+            <div class="compare-card blue">
+              <div class="compare-title">Core Technical Strengths</div>
+              <p>Linux administration and root-cause troubleshooting</p>
+              <p>Storage, networking, security, and SELinux operations</p>
+              <p>Automation-first workflow using shell scripting</p>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h3><i class="fas fa-link"></i>Connect with Achyut</h3>
+          <div class="profile-links">
+            <a class="profile-link linkedin" href="https://www.linkedin.com/in/achyut-hadavani/" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-linkedin"></i>
+              <span><strong>LinkedIn</strong><small>www.linkedin.com/in/achyut-hadavani</small></span>
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+            <a class="profile-link github" href="https://github.com/achyut777" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i>
+              <span><strong>GitHub</strong><small>github.com/achyut777</small></span>
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+          <div class="divider"></div>
+          <h3><i class="fas fa-bullseye"></i>Profile Summary</h3>
+          <p>Achyut Hadavani demonstrates a complete RHCSA skill set with precision across user management, storage, networking, process control, and SELinux policy troubleshooting.</p>
+          <div class="callout success">
+            <span class="callout-icon"><i class="fas fa-circle-check"></i></span>
+            <div>This website is fully personalized for Achyut Hadavani, highlighting a perfect RHCSA 300/300 score and professional Linux administration capability.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-label"><i class="fas fa-compass"></i>Quick Chapter Access</h2>
+    <section class="chapter-grid" aria-label="chapter cards">
+      <article class="chapter-card" data-target="ch1" style="--card-color:#58a6ff">
+        <div class="card-top"><div class="card-icon"><i class="fas fa-user-shield"></i></div><div><div class="card-ch-label">Chapter 1</div><div class="card-ch-title">Users and Access</div></div></div>
+        <p class="card-desc">User creation, password aging, sudo rights, and account lock policies.</p>
+        <div class="card-tags"><span class="tag">useradd</span><span class="tag">passwd</span><span class="tag">sudoers</span></div>
+      </article>
+      <article class="chapter-card" data-target="ch7" style="--card-color:#39d0d8">
+        <div class="card-top"><div class="card-icon"><i class="fas fa-hard-drive"></i></div><div><div class="card-ch-label">Chapter 7</div><div class="card-ch-title">Storage Essentials</div></div></div>
+        <p class="card-desc">Partitioning with parted, filesystem formatting, and mount troubleshooting.</p>
+        <div class="card-tags"><span class="tag">parted</span><span class="tag">mkfs</span><span class="tag">blkid</span></div>
+      </article>
+      <article class="chapter-card" data-target="ch12" style="--card-color:#56d364">
+        <div class="card-top"><div class="card-icon"><i class="fas fa-wifi"></i></div><div><div class="card-ch-label">Chapter 12</div><div class="card-ch-title">Network Control</div></div></div>
+        <p class="card-desc">Manage interfaces, static IP setup, and DNS configuration using nmcli.</p>
+        <div class="card-tags"><span class="tag">nmcli</span><span class="tag">hostnamectl</span><span class="tag">ip</span></div>
+      </article>
+      <article class="chapter-card" data-target="ch15" style="--card-color:#f85149">
+        <div class="card-top"><div class="card-icon"><i class="fas fa-shield-virus"></i></div><div><div class="card-ch-label">Chapter 15</div><div class="card-ch-title">SELinux Tuning</div></div></div>
+        <p class="card-desc">Context corrections, booleans, and policy-aware service debugging.</p>
+        <div class="card-tags"><span class="tag">restorecon</span><span class="tag">setsebool</span><span class="tag">semanage</span></div>
+      </article>
+    </section>
+
+    <section id="ch1" class="content-section sc-ch1">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-user-shield"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Chapter 1</div>
+          <h2>User and Authentication Management</h2>
+          <p>Create accounts with controlled shells, enforce aging, and delegate least-privilege access using sudo.</p>
+        </div>
+        <button class="complete-btn" data-chap="ch1"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-terminal"></i>Core Commands</div>
+        <div class="cb-body">
+          <div class="cmd-grid">
+            <div class="cmd-card"><div class="cmd-name">useradd -m analyst</div><div class="cmd-desc">Create user with home directory.</div></div>
+            <div class="cmd-card"><div class="cmd-name">passwd analyst</div><div class="cmd-desc">Set or reset account password.</div></div>
+            <div class="cmd-card"><div class="cmd-name">chage -M 90 analyst</div><div class="cmd-desc">Set max password age in days.</div></div>
+            <div class="cmd-card"><div class="cmd-name">usermod -aG wheel analyst</div><div class="cmd-desc">Append user to admin group.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-list-check"></i>Exam Workflow</div>
+        <div class="cb-body">
+          <ol class="steps">
+            <li><div class="step-num">1</div><div class="step-body"><strong>Create users first</strong> and set required shell and groups in one pass.</div></li>
+            <li><div class="step-num">2</div><div class="step-body"><strong>Apply password policy</strong> with chage for expiry and warning windows.</div></li>
+            <li><div class="step-num">3</div><div class="step-body"><strong>Verify quickly</strong> with id, getent passwd, and sudo -l.</div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="ch2" class="content-section sc-ch2">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-file-lines"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Chapter 2</div>
+          <h2>File and Text Operations</h2>
+          <p>Use grep, sed, awk, and redirection patterns to transform data fast under exam time pressure.</p>
+        </div>
+        <button class="complete-btn" data-chap="ch2"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-code"></i>Pattern Extraction</div>
+        <div class="cb-body">
+          <div class="pre-wrapper">
+            <pre><code class="language-bash">grep -E '^(root|student)' /etc/passwd
+awk -F: '{print $1, $7}' /etc/passwd
+sed -n '1,20p' /etc/ssh/sshd_config</code></pre>
+          </div>
+          <div class="callout info"><span class="callout-icon"><i class="fas fa-circle-info"></i></span><div>Combine <strong>grep + awk</strong> for fast filtering and field output when troubleshooting user records.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ch3" class="content-section sc-ch3">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-lock"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Chapter 3</div>
+          <h2>Permissions, ACLs, and Umask</h2>
+          <p>Traditional mode bits and ACL layering for collaborative directories and inherited access patterns.</p>
+        </div>
+        <button class="complete-btn" data-chap="ch3"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-table"></i>Permission Matrix</div>
+        <div class="cb-body">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Task</th><th>Command</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Set SGID directory</td><td>chmod 2770 /project</td><td>New files inherit group ownership</td></tr>
+                <tr><td>Add ACL</td><td>setfacl -m u:qa:rwx /project</td><td>Grant user-specific access</td></tr>
+                <tr><td>Default ACL</td><td>setfacl -m d:g:ops:rwx /project</td><td>Auto-apply for newly created files</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ch4" class="content-section sc-ch4">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-box-open"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Chapter 4</div>
+          <h2>Software Management</h2>
+          <p>Install, query, and troubleshoot repositories using dnf and rpm verification options.</p>
+        </div>
+        <button class="complete-btn" data-chap="ch4"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-terminal"></i>DNF Quick Pack</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">dnf repolist
+dnf install -y httpd
+dnf provides */semanage
+rpm -qf /usr/sbin/httpd</code></pre></div></div></div>
+    </section>
+
+    <section id="ch6" class="content-section sc-ch6">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-gears"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Chapter 6</div>
+          <h2>Process and Service Control</h2>
+          <p>Track process trees, kill safely, and manage persistent services with systemctl and journalctl.</p>
+        </div>
+        <button class="complete-btn" data-chap="ch6"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-server"></i>Service Checks</div><div class="cb-body"><div class="two-col"><div class="compare-card red"><div class="compare-title">Runtime</div><p>systemctl status httpd</p><p>ss -tulnp | grep :80</p></div><div class="compare-card green"><div class="compare-title">Persistence</div><p>systemctl enable --now httpd</p><p>systemctl is-enabled httpd</p></div></div></div></div>
+    </section>
+
+    <section id="ch7" class="content-section sc-ch7">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-hard-drive"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Chapter 7</div>
+          <h2>Storage Fundamentals</h2>
+          <p>Partition and format disks predictably, then make mounts persistent through fstab entries.</p>
+        </div>
+        <button class="complete-btn" data-chap="ch7"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-code"></i>Disk Provisioning</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">lsblk
+parted /dev/vdb --script mklabel gpt mkpart primary xfs 1MiB 100%
+mkfs.xfs /dev/vdb1
+mkdir -p /data
+blkid /dev/vdb1</code></pre></div></div></div>
+    </section>
+
+    <section id="ch8" class="content-section sc-ch8">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-layer-group"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 8</div><h2>LVM and Swap</h2><p>Build flexible volume groups and logical volumes, then resize online safely.</p></div>
+        <button class="complete-btn" data-chap="ch8"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-database"></i>LVM Build Recipe</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">pvcreate /dev/vdc1
+vgcreate vgdata /dev/vdc1
+lvcreate -n lvlogs -L 2G vgdata
+mkfs.xfs /dev/vgdata/lvlogs
+lvextend -L +1G /dev/vgdata/lvlogs
+xfs_growfs /dev/vgdata/lvlogs</code></pre></div></div></div>
+    </section>
+
+    <section id="ch9" class="content-section sc-ch9">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-plug-circle-check"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 9</div><h2>Mounting and Boot Reliability</h2><p>Use UUID-based mounts and test all entries before rebooting.</p></div>
+        <button class="complete-btn" data-chap="ch9"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-circle-exclamation"></i>Fast Validation</div><div class="cb-body"><p>After editing fstab always run <code>mount -a</code> and confirm no errors before final submission.</p><div class="callout warning"><span class="callout-icon"><i class="fas fa-triangle-exclamation"></i></span><div>A broken fstab can block boot. Keep a rescue strategy ready.</div></div></div></div>
+    </section>
+
+    <section id="ch10" class="content-section sc-ch10">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-terminal"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 10</div><h2>Bash Scripting Essentials</h2><p>Automate repetitive checks with shell scripts that are readable and safe.</p></div>
+        <button class="complete-btn" data-chap="ch10"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-file-code"></i>Service Health Script</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">#!/usr/bin/env bash
+set -euo pipefail
+for svc in sshd chronyd firewalld; do
+  if systemctl is-active --quiet "$svc"; then
+    echo "OK: $svc"
+  else
+    echo "FAIL: $svc"
+  fi
+done</code></pre></div></div></div>
+    </section>
+
+    <section id="ch11" class="content-section sc-ch11">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-clock-rotate-left"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 11</div><h2>Scheduling Jobs</h2><p>Use cron and systemd timers for recurring tasks and predictable execution windows.</p></div>
+        <button class="complete-btn" data-chap="ch11"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-calendar-days"></i>Cron and Timers</div><div class="cb-body"><div class="cmd-grid"><div class="cmd-card"><div class="cmd-name">crontab -e</div><div class="cmd-desc">Edit per-user schedule.</div></div><div class="cmd-card"><div class="cmd-name">systemctl list-timers</div><div class="cmd-desc">Inspect active timers.</div></div><div class="cmd-card"><div class="cmd-name">journalctl -u backup.timer</div><div class="cmd-desc">Trace timer executions.</div></div></div></div></div>
+    </section>
+
+    <section id="ch11b" class="content-section sc-ch11b">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-book"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 11b</div><h2>Logs and Monitoring</h2><p>Filter journal output by unit, priority, and time to isolate root causes quickly.</p></div>
+        <button class="complete-btn" data-chap="ch11b"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-magnifying-glass"></i>Journal Search</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">journalctl -xe
+journalctl -u sshd --since "-15 min"
+journalctl -p err..alert --since today</code></pre></div></div></div>
+    </section>
+
+    <section id="ch12" class="content-section sc-ch12">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-wifi"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 12</div><h2>Network Configuration</h2><p>Set IP, gateway, DNS, and hostnames with predictable nmcli workflows.</p></div>
+        <button class="complete-btn" data-chap="ch12"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-network-wired"></i>Static IP Flow</div>
+        <div class="cb-body">
+          <div class="pre-wrapper"><pre><code class="language-bash">nmcli con show
+nmcli con mod "Wired connection 1" ipv4.addresses 192.168.56.20/24
+nmcli con mod "Wired connection 1" ipv4.gateway 192.168.56.1
+nmcli con mod "Wired connection 1" ipv4.dns "8.8.8.8 1.1.1.1"
+nmcli con mod "Wired connection 1" ipv4.method manual
+nmcli con up "Wired connection 1"</code></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ch15" class="content-section sc-ch15">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-shield-virus"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Chapter 15</div><h2>SELinux Operations</h2><p>Understand enforcement states, label corrections, and booleans for service policies.</p></div>
+        <button class="complete-btn" data-chap="ch15"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-shield-halved"></i>Common Commands</div>
+        <div class="cb-body">
+          <div class="cmd-grid">
+            <div class="cmd-card"><div class="cmd-name">getenforce</div><div class="cmd-desc">Show current SELinux mode.</div></div>
+            <div class="cmd-card"><div class="cmd-name">restorecon -Rv /var/www/html</div><div class="cmd-desc">Fix context labels recursively.</div></div>
+            <div class="cmd-card"><div class="cmd-name">setsebool -P httpd_can_network_connect on</div><div class="cmd-desc">Allow outbound HTTP daemon network access.</div></div>
+          </div>
+          <div class="callout danger"><span class="callout-icon"><i class="fas fa-skull-crossbones"></i></span><div>Do not disable SELinux during exam tasks. Fix labels and booleans instead.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="networking" class="content-section sc-net">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-network-wired"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Lab Track</div><h2>Networking Lab Scenarios</h2><p>Practice connectivity diagnosis from link state to DNS resolution.</p></div>
+        <button class="complete-btn" data-chap="networking"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-stethoscope"></i>Troubleshooting Ladder</div><div class="cb-body"><ol class="steps"><li><div class="step-num">1</div><div class="step-body">Check interface state using <code>ip a</code> and <code>nmcli dev status</code>.</div></li><li><div class="step-num">2</div><div class="step-body">Validate route table with <code>ip r</code>.</div></li><li><div class="step-num">3</div><div class="step-body">Test gateway, then DNS resolution with <code>ping</code> and <code>dig</code>.</div></li></ol></div></div>
+    </section>
+
+    <section id="nfs" class="content-section sc-nfs">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-folder-tree"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Lab Track</div><h2>NFS Client and Server Setup</h2><p>Expose controlled exports and mount with auto-reconnect strategies.</p></div>
+        <button class="complete-btn" data-chap="nfs"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-share-nodes"></i>Server Side</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">dnf install -y nfs-utils
+mkdir -p /exports/share
+echo '/exports/share *(rw,sync,no_root_squash)' >> /etc/exports
+exportfs -rav
+systemctl enable --now nfs-server</code></pre></div></div></div>
+    </section>
+
+    <section id="podman" class="content-section sc-pod">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-cubes"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Lab Track</div><h2>Podman Containers</h2><p>Run rootless containers, map ports, and generate systemd units from running apps.</p></div>
+        <button class="complete-btn" data-chap="podman"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb"><div class="cb-title"><i class="fas fa-box"></i>Container Lifecycle</div><div class="cb-body"><div class="pre-wrapper"><pre><code class="language-bash">podman pull registry.access.redhat.com/ubi9/httpd-24
+podman run -d --name web -p 8080:8080 registry.access.redhat.com/ubi9/httpd-24
+podman ps
+podman generate systemd --name web --files --new</code></pre></div></div></div>
+    </section>
+
+    <section id="simulator" class="content-section sc-sim">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-stopwatch"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Advanced Practice</div><h2>RHCSA Exam Simulator</h2><p>Train with timed practice, randomized tasks, and persistent notes to simulate real exam pressure.</p></div>
+        <button class="complete-btn" data-chap="simulator"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="sim-grid">
+        <article class="cb sim-card">
+          <div class="cb-title"><i class="fas fa-hourglass-half"></i>Exam Timer</div>
+          <div class="cb-body">
+            <div id="examTimer" class="exam-timer">02:30:00</div>
+            <div class="action-row">
+              <button id="timerStart" class="btn-solid"><i class="fas fa-play"></i> Start</button>
+              <button id="timerPause" class="btn-solid ghost"><i class="fas fa-pause"></i> Pause</button>
+              <button id="timerReset" class="btn-solid danger"><i class="fas fa-rotate-left"></i> Reset</button>
+            </div>
+            <p class="mini-note">Timer state is saved in your browser so your session can continue after refresh.</p>
+          </div>
+        </article>
+        <article class="cb sim-card">
+          <div class="cb-title"><i class="fas fa-chart-pie"></i>Readiness Score</div>
+          <div class="cb-body">
+            <div id="simProgressRing" class="sim-progress-ring" style="--sim-pct:0">
+              <span id="simProgressText">0%</span>
+            </div>
+            <p class="mini-note">This score mirrors your completion across all RHCSA training sections.</p>
+          </div>
+        </article>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-dice"></i>Randomized Exam Task Generator</div>
+        <div class="cb-body">
+          <div class="action-row">
+            <button id="generateTaskBtn" class="btn-solid"><i class="fas fa-shuffle"></i> Generate Task</button>
+            <button id="showTaskSolutionBtn" class="btn-solid ghost"><i class="fas fa-key"></i> Reveal Command</button>
+          </div>
+          <div id="generatedTask" class="task-output">Click Generate Task to start a random RHCSA challenge.</div>
+          <pre id="generatedTaskSolution" class="task-solution" hidden><code class="language-bash"></code></pre>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-pen"></i>Practice Notes (Auto Save)</div>
+        <div class="cb-body">
+          <textarea id="practiceNotes" class="practice-notes" placeholder="Write your command plans, troubleshooting notes, and exam checklist here..."></textarea>
+          <div class="action-row">
+            <button id="clearPracticeNotes" class="btn-solid danger"><i class="fas fa-trash"></i> Clear Notes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools" class="content-section sc-tools">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+        <div class="section-meta"><div class="section-ch-label">Final Track</div><h2>Exam Day Toolbelt</h2><p>Keep these checks ready to validate tasks quickly and avoid hidden errors.</p></div>
+        <button class="complete-btn" data-chap="tools"><i class="far fa-circle"></i> Mark Complete</button>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-toolbox"></i>High Value Commands</div>
+        <div class="cb-body">
+          <div class="cmd-grid">
+            <div class="cmd-card"><div class="cmd-name">sudo -l</div><div class="cmd-desc">Validate delegated rights.</div></div>
+            <div class="cmd-card"><div class="cmd-name">mount -a</div><div class="cmd-desc">Validate all fstab entries.</div></div>
+            <div class="cmd-card"><div class="cmd-name">firewall-cmd --list-all</div><div class="cmd-desc">Review active zone rules.</div></div>
+            <div class="cmd-card"><div class="cmd-name">ss -tulnp</div><div class="cmd-desc">Verify listening sockets.</div></div>
+          </div>
+          <div class="callout success"><span class="callout-icon"><i class="fas fa-circle-check"></i></span><div>Use a final 5-minute verification sweep before finishing: users, services, networking, storage, and SELinux labels.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="handbook" class="content-section sc-tools">
+      <div class="section-head">
+        <div class="section-icon"><i class="fas fa-book-open"></i></div>
+        <div class="section-meta">
+          <div class="section-ch-label">Complete Curriculum</div>
+          <h2>RHCSA Full Handbook: Scratch To Advanced</h2>
+          <p>End-to-end study material for every chapter with foundational concepts, command workflows, validation commands, and advanced exam tips.</p>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="cb-title"><i class="fas fa-map"></i>Syllabus Coverage Matrix</div>
+        <div class="cb-body">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Chapter</th><th>Core Skills</th><th>Advanced Focus</th><th>Validation</th></tr></thead>
+              <tbody>
+                <tr><td>CH1 Users & Auth</td><td>useradd, passwd, groups</td><td>sudo policy, password aging</td><td>id, getent, chage -l</td></tr>
+                <tr><td>CH2 Files & Text</td><td>cp, mv, rm, grep</td><td>expansions, pattern filters</td><td>grep/sort output checks</td></tr>
+                <tr><td>CH3 Permissions</td><td>chmod, chown, ACL</td><td>SUID/SGID/sticky, umask</td><td>ls -l, ls -Z, getfacl</td></tr>
+                <tr><td>CH4 Software</td><td>dnf install/remove</td><td>repos, package history</td><td>rpm -q, dnf repolist</td></tr>
+                <tr><td>CH6 Process</td><td>ps, top, kill</td><td>nice/renice, tuned</td><td>ps -l, uptime, systemctl</td></tr>
+                <tr><td>CH7/8/9 Storage</td><td>partition, fs, mount</td><td>LVM lifecycle, swap</td><td>lsblk, blkid, mount -a</td></tr>
+                <tr><td>CH10 Scripting</td><td>bash basics</td><td>find+exec, automation</td><td>shellcheck mindset</td></tr>
+                <tr><td>CH11 Scheduling</td><td>at, crontab</td><td>anacron reliability</td><td>crontab -l, logs</td></tr>
+                <tr><td>CH11b Logs & Time</td><td>journal, rsyslog</td><td>chrony/NTP config</td><td>chronyc sources, timedatectl</td></tr>
+                <tr><td>CH12 Networking</td><td>nmcli, ip, route</td><td>persistent profiles</td><td>ip a, ip r, ping, ss</td></tr>
+                <tr><td>CH15 SELinux + Firewall</td><td>modes, contexts</td><td>semanage port, booleans</td><td>sestatus, restorecon</td></tr>
+                <tr><td>NFS + Podman</td><td>mount exports, container run</td><td>autofs, rootless systemd</td><td>showmount, podman ps</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter">
+    <svg class="footer-wave" viewBox="0 0 1440 40" preserveAspectRatio="none">
+      <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,0 L0,0 Z"></path>
+    </svg>
+    <div class="footer-content">
+      <div class="footer-brand"><i class="fa-brands fa-linux"></i> RHCSA Master Hub</div>
+      <div class="footer-links">
+        <a href="#home">Dashboard</a>
+        <a href="#simulator">Simulator</a>
+        <a href="#handbook">Handbook</a>
+        <a href="https://github.com/achyut777" target="_blank">GitHub</a>
+      </div>
+      <div class="footer-copy">Built with precision by Achyut Hadavani · RHCSA 300/300</div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <button id="chatbotToggle" class="chatbot-toggle" aria-label="Open Linux chatbot">
+    <i class="fas fa-robot"></i>
+  </button>
+
+  <section id="chatbotPanel" class="chatbot-panel" aria-label="Linux chatbot" aria-live="polite">
+    <header class="chatbot-head">
+      <div class="chatbot-title"><i class="fas fa-terminal"></i> Linux Helper Bot</div>
+      <button id="chatbotClose" class="chatbot-close" aria-label="Close chatbot"><i class="fas fa-xmark"></i></button>
+    </header>
+    <div id="chatbotMessages" class="chatbot-messages">
+      <div class="chat-msg bot">
+        Ask any Linux or RHCSA question. I answer only Linux topics like users, permissions, SELinux, networking, storage, systemd, and shell commands.
+      </div>
+    </div>
+    <form id="chatbotForm" class="chatbot-form">
+      <input id="chatbotInput" class="chatbot-input" type="text" placeholder="Ask Linux question..." autocomplete="off" />
+      <button class="chatbot-send" type="submit"><i class="fas fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <div id="shortcutsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+    <div class="modal-box">
+      <div class="modal-title">
+        <i class="fas fa-keyboard"></i> Keyboard Shortcuts
+        <button class="modal-close" aria-label="Close modal"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="shortcuts-grid">
+        <div class="sk-key"><kbd>/</kbd></div><div class="sk-desc">Focus search</div>
+        <div class="sk-key"><kbd>?</kbd></div><div class="sk-desc">Toggle shortcuts modal</div>
+        <div class="sk-key"><kbd>Alt</kbd><kbd>B</kbd></div><div class="sk-desc">Back to top</div>
+        <div class="sk-key"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>X</kbd></div><div class="sk-desc">Jump to exam simulator</div>
+        <div class="sk-key"><kbd>Esc</kbd></div><div class="sk-desc">Close search and modal</div>
+      </div>
+    </div>
   </div>
 
+  <div id="cmdPaletteOverlay" class="cmd-palette-overlay">
+    <div class="cmd-palette">
+      <input id="cmdPaletteInput" class="cmd-palette-input" type="text" placeholder="Type a command or section name…" autocomplete="off" />
+      <div id="cmdPaletteResults" class="cmd-palette-results"></div>
+      <div class="cmd-palette-footer">
+        <span><kbd>↑↓</kbd> navigate</span>
+        <span><kbd>Enter</kbd> go</span>
+        <span><kbd>Esc</kbd> close</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="flashcardOverlay" class="flashcard-overlay">
+    <div class="flashcard-box">
+      <button class="flashcard-close" id="flashcardClose"><i class="fas fa-xmark"></i></button>
+      <div class="flashcard-label">Command Flashcard</div>
+      <div class="flashcard-question" id="flashcardQ">Press F to start</div>
+      <div class="flashcard-options" id="flashcardOptions"></div>
+      <div class="flashcard-score">Score: <strong id="flashcardScore">0</strong> / <span id="flashcardTotal">0</span></div>
+      <button class="btn-solid" id="flashcardNext" style="margin-top:14px"><i class="fas fa-forward"></i> Next Card</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
