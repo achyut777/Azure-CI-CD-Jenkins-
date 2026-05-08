@@ -169,7 +169,7 @@ $subtitle = "Welcome to my PHP page";
     </h1>
     <div class="divider"></div>
     <p class="subtitle"><?php echo htmlspecialchars($subtitle); ?></p>
-    <div class="badge">Rendered by PHP</div>
+    <div class="badge">CSK WON 2026 IPL TROPHY 🏆 </div>
   </div>
 
 </body>
